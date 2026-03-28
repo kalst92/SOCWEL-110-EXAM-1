@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOCWEL 110 — Midterm Study Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #1a1208;
+    --cream: #f5f0e8;
+    --warm: #ece5d4;
+    --rust: #b5401c;
+    --rust-light: #e8896b;
+    --teal: #1d6b72;
+    --teal-light: #a8d4d8;
+    --gold: #c8922a;
+    --gold-light: #f0d89a;
+    --sage: #4d7358;
+    --sage-light: #c4dbc9;
+    --gray: #7a7068;
+    --border: #d4c9b4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 20px,
+      rgba(255,255,255,.02) 20px, rgba(255,255,255,.02) 21px
+    );
+  }
+  header .badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: 1px solid var(--rust);
+    color: var(--rust-light);
+    padding: .25rem .7rem;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    max-width: 700px;
+  }
+  header p {
+    margin-top: .75rem;
+    font-size: .95rem;
+    color: #c0b8a8;
+    max-width: 600px;
+  }
+  .exam-alert {
+    margin-top: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    background: rgba(181,64,28,.2);
+    border: 1px solid var(--rust);
+    border-left: 4px solid var(--rust);
+    padding: .6rem 1rem;
+    font-size: .85rem;
+    color: var(--rust-light);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    background: var(--warm);
+    border-bottom: 2px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav button {
+    background: none;
+    border: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--gray);
+    padding: .7rem .9rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  nav button:hover { color: var(--ink); }
+  nav button.active { color: var(--rust); border-bottom-color: var(--rust); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  section { display: none; }
+  section.active { display: block; }
+
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+  }
+  .section-header .week-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: .2rem .5rem;
+    letter-spacing: .08em;
+  }
+
+  /* ── CARDS / CONTENT BLOCKS ── */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: .75rem;
+    color: var(--ink);
+  }
+  .card p, .card li { font-size: .9rem; line-height: 1.65; color: #3a3228; }
+  .card ul, .card ol { padding-left: 1.4rem; }
+  .card li { margin-bottom: .35rem; }
+
+  .accent-bar {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: 4px;
+  }
+  .accent-rust { background: var(--rust); }
+  .accent-teal { background: var(--teal); }
+  .accent-gold { background: var(--gold); }
+  .accent-sage { background: var(--sage); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+  @media (max-width: 640px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* ── KEY TERM ── */
+  .key-term {
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    padding: .8rem 1rem;
+    margin-bottom: .6rem;
+  }
+  .key-term strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .85rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: .25rem;
+  }
+  .key-term p { font-size: .88rem; }
+
+  /* ── COMPARISON TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-bottom: 1rem; }
+  th {
+    background: var(--ink); color: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem; letter-spacing: .05em;
+    padding: .6rem .8rem; text-align: left;
+  }
+  td { padding: .55rem .8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--warm); }
+
+  /* ── QUIZ COMPONENTS ── */
+  .quiz-block {
+    background: white;
+    border: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .quiz-block .q-header {
+    background: var(--warm);
+    padding: 1rem 1.25rem;
+    display: flex; gap: .75rem; align-items: flex-start;
+  }
+  .q-num {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    min-width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .q-header p { font-size: .9rem; font-weight: 500; line-height: 1.5; }
+
+  .options-list { padding: .75rem 1.25rem; list-style: none; }
+  .options-list li {
+    padding: .6rem .9rem;
+    margin-bottom: .4rem;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: .88rem;
+    transition: all .15s;
+    display: flex; align-items: flex-start; gap: .6rem;
+  }
+  .options-list li .opt-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem;
+    color: var(--gray);
+    min-width: 18px;
+    margin-top: 1px;
+  }
+  .options-list li:hover { border-color: var(--teal); background: rgba(29,107,114,.05); }
+  .options-list li.correct { border-color: var(--sage) !important; background: rgba(77,115,88,.1); color: var(--sage); }
+  .options-list li.incorrect { border-color: var(--rust) !important; background: rgba(181,64,28,.08); color: var(--rust); text-decoration: line-through; }
+  .options-list li.revealed { border-color: var(--sage); background: rgba(77,115,88,.07); }
+
+  .explanation {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: .9rem 1.25rem;
+    background: rgba(200,146,42,.07);
+    font-size: .86rem;
+    line-height: 1.6;
+    color: #3a3228;
+  }
+  .explanation strong { color: var(--gold); font-family: 'IBM Plex Mono', monospace; font-size: .75rem; display: block; margin-bottom: .3rem; }
+  .explanation.show { display: block; }
+
+  /* ── SHORT ANSWER ── */
+  .sa-block {
+    background: white;
+    border: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+  }
+  .sa-header {
+    padding: 1rem 1.25rem .75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sa-type {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    color: var(--teal);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: .4rem;
+  }
+  .sa-header p { font-size: .9rem; font-weight: 500; line-height: 1.5; }
+  textarea.sa-input {
+    width: 100%;
+    min-height: 100px;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    padding: .9rem 1.25rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: .88rem;
+    resize: vertical;
+    background: #faf8f4;
+    outline: none;
+    color: var(--ink);
+  }
+  textarea.sa-input:focus { background: white; }
+  .sa-footer {
+    padding: .6rem 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem;
+  }
+  .reveal-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .06em;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: .45rem .9rem;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .reveal-btn:hover { background: var(--rust); }
+  .model-answer {
+    display: none;
+    padding: .9rem 1.25rem;
+    background: rgba(29,107,114,.05);
+    border-top: 1px solid var(--border);
+    font-size: .86rem;
+    line-height: 1.65;
+  }
+  .model-answer strong { color: var(--teal); font-size: .75rem; font-family: 'IBM Plex Mono', monospace; display: block; margin-bottom: .4rem; }
+  .model-answer.show { display: block; }
+
+  /* ── VIGNETTES ── */
+  .vignette {
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+    background: white;
+    overflow: hidden;
+  }
+  .vignette-banner {
+    background: var(--ink);
+    color: var(--cream);
+    padding: .8rem 1.25rem;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .vignette-banner .v-icon {
+    font-size: 1.3rem;
+  }
+  .vignette-banner h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .vignette-scenario {
+    padding: 1.25rem;
+    background: #faf8f4;
+    border-bottom: 1px solid var(--border);
+    font-size: .88rem;
+    line-height: 1.7;
+  }
+  .vignette-scenario .client-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    color: var(--rust);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: .5rem;
+  }
+  .vignette-questions { padding: 1.25rem; }
+  .vignette-questions h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .v-question {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    padding: .9rem 1rem;
+  }
+  .v-question p.q-text { font-size: .88rem; font-weight: 500; margin-bottom: .6rem; }
+  .v-question .answer-area { margin-top: .5rem; }
+
+  /* ── PROGRESS ── */
+  #score-tracker {
+    position: fixed;
+    bottom: 1.5rem; right: 1.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: .7rem 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    z-index: 200;
+  }
+  #score-display { color: var(--gold-light); font-weight: 600; }
+
+  /* ── STUDY GUIDE REFERENCE ── */
+  .reference-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .ref-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.1rem 1.25rem;
+  }
+  .ref-card h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: .6rem;
+  }
+  .ref-card ul { padding-left: 1rem; font-size: .84rem; }
+  .ref-card li { margin-bottom: .3rem; color: #3a3228; }
+
+  /* ── HIERARCHY VISUAL ── */
+  .hierarchy {
+    display: flex; flex-direction: column; gap: .4rem;
+    margin: .75rem 0;
+  }
+  .hierarchy-item {
+    display: flex; align-items: center; gap: .75rem;
+    padding: .55rem .9rem;
+    font-size: .85rem;
+  }
+  .h-gold { background: rgba(200,146,42,.15); border-left: 4px solid var(--gold); }
+  .h-teal { background: rgba(29,107,114,.1); border-left: 4px solid var(--teal); }
+  .h-sage { background: rgba(77,115,88,.1); border-left: 4px solid var(--sage); }
+  .h-gray { background: var(--warm); border-left: 4px solid var(--gray); }
+  .h-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem;
+    min-width: 24px;
+    font-weight: 600;
+  }
+
+  /* ── MISC ── */
+  .callout {
+    background: rgba(181,64,28,.07);
+    border-left: 4px solid var(--rust);
+    padding: .8rem 1rem;
+    margin: 1rem 0;
+    font-size: .88rem;
+    line-height: 1.6;
+  }
+  .callout strong { color: var(--rust); }
+
+  .tag {
+    display: inline-block;
+    background: var(--warm);
+    border: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .68rem;
+    padding: .15rem .45rem;
+    color: var(--gray);
+    margin-right: .35rem;
+    margin-bottom: .25rem;
+  }
+  .tag.rust { background: rgba(181,64,28,.1); border-color: var(--rust); color: var(--rust); }
+  .tag.teal { background: rgba(29,107,114,.1); border-color: var(--teal); color: var(--teal); }
+  .tag.gold { background: rgba(200,146,42,.1); border-color: var(--gold); color: var(--gold); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  .score-badge {
+    display: inline-block;
+    background: var(--sage);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .7rem;
+    padding: .2rem .5rem;
+    margin-left: .5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">SOCWEL 110 · Spring 2026 · UC Berkeley</div>
+  <h1>Social Work as a Profession<br>Midterm Study Guide</h1>
+  <p>Comprehensive review covering Weeks 2–9 · Multiple choice, short answer, and vignettes</p>
+  <div class="exam-alert">
+    📅 EXAM 1 · Monday, March 30th in section · 50 minutes · Closed book, closed internet (bCourses only)
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('reference', this)">📋 Quick Reference</button>
+  <button onclick="showSection('mc', this)">🔘 Multiple Choice</button>
+  <button onclick="showSection('sa', this)">✏️ Short Answer</button>
+  <button onclick="showSection('vignettes', this)">📖 Vignettes</button>
+  <button onclick="showSection('ethics', this)">⚖️ Ethics Deep Dive</button>
+  <button onclick="showSection('justice', this)">⚖️ Social Justice</button>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════════ QUICK REFERENCE -->
+<section id="reference" class="active">
+  <div class="section-header">
+    <h2>Quick Reference</h2>
+    <span class="week-tag">EXAM PREP · WEEKS 2–9</span>
+  </div>
+
+  <div class="callout">
+    <strong>From the exam review slides:</strong> You will be given ONE social work topic/issue and asked to apply the broad ideas from class. Ground your answers in the language, vocabulary, and frameworks discussed in lecture and readings. No cramming small details — apply what you've internalized.
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">The Three Foundational Lineages</h3>
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th>Mary Richmond &amp; COS</th><th>Jane Addams &amp; Settlement Houses</th><th>Black Settlement Houses &amp; Mutual Aid</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Era</strong></td><td>Late 1800s–early 1900s</td><td>Late 1800s–early 1900s</td><td>Late 1800s–mid 1900s</td></tr>
+      <tr><td><strong>Core Philosophy</strong></td><td>Scientific, systematic casework; poverty is individual failure; moral reform</td><td>Poverty is structural; workers live in community &amp; advocate for systemic change</td><td>Self-determination &amp; community uplift for Black Americans excluded from white-run services; oppression is structural</td></tr>
+      <tr><td><strong>Who They Served</strong></td><td>Primarily poor white urban families</td><td>Primarily poor urban immigrants &amp; workers</td><td>Black Americans in the South and urban North</td></tr>
+      <tr><td><strong>Key Method</strong></td><td>Assess–diagnose–treat; <em>Social Diagnosis</em> (1917); charity coordination</td><td>Community immersion, labor advocacy, legislative reform (child labor laws)</td><td>Building parallel institutions: schools, clinics, settlement houses; mutual aid; political action</td></tr>
+      <tr><td><strong>Practice Level</strong></td><td>Micro</td><td>Macro</td><td>Both micro + macro</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">The 6 Core NASW Values</h3>
+  <div class="grid-3">
+    <div class="key-term"><strong>Service</strong><p>Prioritize serving others above self-interest; use skills to help people in need and address social problems.</p></div>
+    <div class="key-term"><strong>Social Justice</strong><p>Challenge injustice; pursue change on behalf of vulnerable and oppressed populations.</p></div>
+    <div class="key-term"><strong>Dignity &amp; Worth of the Person</strong><p>Respect the inherent dignity of every person; mindful of individual differences.</p></div>
+    <div class="key-term"><strong>Importance of Human Relationships</strong><p>Relationships between people are essential vehicles for change; engage people as partners.</p></div>
+    <div class="key-term"><strong>Integrity</strong><p>Behave in a trustworthy manner; practice honestly and responsibly.</p></div>
+    <div class="key-term"><strong>Competence</strong><p>Continually develop professional expertise; practice only within areas of competence.</p></div>
+  </div>
+  <div class="callout"><strong>Exam tip:</strong> "Empathy" and "Altruism" are NOT official NASW core values — common trick questions!</div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">Flexner's 6 Criteria for a Profession (1915)</h3>
+  <div class="grid-2">
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-rust"></div>
+      <h3>1. Intellectual Operations</h3><p>Work involves individual responsibility and creative thinking, not routine tasks.</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-rust"></div>
+      <h3>2. Specialized Knowledge</h3><p>Derives from science and learning; creates a distinct body of knowledge.</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-gold"></div>
+      <h3>3. Teachable Techniques</h3><p>Methods can be systematically communicated through professional education.</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-gold"></div>
+      <h3>4. Practical Application</h3><p>Knowledge serves definite, practical purposes in the real world.</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-teal"></div>
+      <h3>5. Self-Organization</h3><p>Professional associations set standards, share knowledge, and maintain quality.</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-teal"></div>
+      <h3>6. Altruistic Motivation</h3><p>Practitioners prioritize social service over financial gain.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">Multi-Level Practice</h3>
+  <div class="grid-3">
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-teal"></div>
+      <h3>Micro</h3>
+      <p>Direct work with individuals, families, small groups. Counseling, case management, crisis intervention.</p>
+      <br><p><span class="tag teal">Case Manager</span><span class="tag teal">Clinical SW</span></p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-gold"></div>
+      <h3>Mezzo</h3>
+      <p>Organizations, neighborhoods, formal groups. Program design, supervision, resource management.</p>
+      <br><p><span class="tag gold">Program Director</span><span class="tag gold">Supervisor</span></p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-rust"></div>
+      <h3>Macro</h3>
+      <p>Communities, laws, systems. Structural change, social justice, policy advocacy.</p>
+      <br><p><span class="tag rust">Organizer</span><span class="tag rust">Policy Advocate</span></p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">EBP Evidence Hierarchy</h3>
+  <div class="hierarchy">
+    <div class="hierarchy-item h-gold"><span class="h-num">🥇</span><div><strong>Systematic Reviews &amp; Meta-Analyses</strong> — Strongest evidence; synthesize multiple high-quality studies</div></div>
+    <div class="hierarchy-item h-teal"><span class="h-num">🥈</span><div><strong>Randomized Controlled Trials (RCTs)</strong> — Gold standard for evaluating intervention efficacy</div></div>
+    <div class="hierarchy-item h-sage"><span class="h-num">🥉</span><div><strong>Quasi-Experimental Studies</strong> — Compare interventions without random assignment</div></div>
+    <div class="hierarchy-item h-gray"><span class="h-num">📋</span><div><strong>Non-Experimental / Qualitative / Expert Opinion</strong> — Weakest evidence; still valuable for cultural context</div></div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">Social Justice Frameworks</h3>
+  <table>
+    <thead><tr><th>Theorist</th><th>Key Concept</th><th>Test for Injustice</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rawls (1999)</strong></td><td>Justice as Fairness; Difference Principle; Liberty Principle; Fair Equality of Opportunity</td><td>Does the inequality benefit the least advantaged? Is access genuinely fair?</td></tr>
+      <tr><td><strong>Sen (1999)</strong></td><td>Capabilities Approach — focus on what people can actually do and be</td><td>Can people actually exercise their freedoms given their circumstances?</td></tr>
+      <tr><td><strong>Nussbaum (2003)</strong></td><td>10 Central Human Capabilities as threshold requirements of dignity</td><td>Does every person reach the minimum threshold for each capability?</td></tr>
+      <tr><td><strong>Care Ethics (Noddings)</strong></td><td>Relationships, interdependence, vulnerability as moral core</td><td>Who cares for whom? Is care work valued and equitably distributed?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="reference-grid" style="margin-top:1rem;">
+    <div class="ref-card">
+      <h4>Rawls's 3 Principles</h4>
+      <ul>
+        <li><strong>Liberty Principle:</strong> Equal basic liberties for all</li>
+        <li><strong>Fair Equality of Opportunity:</strong> Positions genuinely accessible</li>
+        <li><strong>Difference Principle:</strong> Inequalities ok only if they benefit the least advantaged</li>
+      </ul>
+    </div>
+    <div class="ref-card">
+      <h4>Nussbaum's 10 Capabilities</h4>
+      <ul>
+        <li>Life · Bodily health · Bodily integrity</li>
+        <li>Senses, imagination &amp; thought</li>
+        <li>Emotions · Practical reason</li>
+        <li>Affiliation · Contact with other species</li>
+        <li>Play · Control over one's environment</li>
+      </ul>
+    </div>
+    <div class="ref-card">
+      <h4>EBP 5-Step Process</h4>
+      <ul>
+        <li>Ask — Create answerable question</li>
+        <li>Acquire — Locate best evidence</li>
+        <li>Appraise — Evaluate quality &amp; applicability</li>
+        <li>Apply — Implement collaboratively</li>
+        <li>Audit/Analyze — Evaluate effectiveness</li>
+      </ul>
+    </div>
+    <div class="ref-card">
+      <h4>Community Organizing Phases</h4>
+      <ul>
+        <li>Assessment → Research → Mobilization</li>
+        <li>Action → Reflection</li>
+        <li>Power analysis: Who can turn "No" → "Yes"?</li>
+        <li>Tactic escalation: low → medium → high pressure</li>
+      </ul>
+    </div>
+    <div class="ref-card">
+      <h4>Direct Practice Steps (Micro)</h4>
+      <ul>
+        <li>Engagement → Assessment → Planning</li>
+        <li>Implementation → Evaluation</li>
+        <li>Termination → Follow-Up</li>
+        <li>Assessment is ongoing — not linear!</li>
+      </ul>
+    </div>
+    <div class="ref-card">
+      <h4>Ethical Decision-Making</h4>
+      <ul>
+        <li>Identify the dilemma</li>
+        <li>Gather relevant facts</li>
+        <li>Consult codes &amp; supervision</li>
+        <li>Consider ethical theories</li>
+        <li>Explore personal values &amp; biases</li>
+        <li>Decide, document, reflect</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ MULTIPLE CHOICE -->
+<section id="mc">
+  <div class="section-header">
+    <h2>Multiple Choice</h2>
+    <span class="week-tag">WEEKS 2–9 · CLICK TO ANSWER</span>
+  </div>
+  <p style="font-size:.85rem; color:var(--gray); margin-bottom:1.5rem;">Click an answer to see if it's correct. The explanation will appear below.</p>
+
+  <!-- Q1 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">1</span><p>Which historical root of social work is most directly connected to modern clinical/case management practice?</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,1)"><span class="opt-label">A</span> Jane Addams &amp; the Settlement House Movement</li>
+      <li onclick="mc(this,true,1)"><span class="opt-label">B</span> Mary Richmond &amp; the Charity Organization Societies (COS)</li>
+      <li onclick="mc(this,false,1)"><span class="opt-label">C</span> Black mutual aid networks and institutional churches</li>
+      <li onclick="mc(this,false,1)"><span class="opt-label">D</span> The Progressive Era labor movement</li>
+    </ul>
+    <div class="explanation" id="exp-1"><strong>EXPLANATION</strong> Mary Richmond formalized the assess–diagnose–treat model in <em>Social Diagnosis</em> (1917), which became the foundation of clinical social work. The COS used "friendly visitors" to investigate individual needs and determine moral worthiness — this is the direct ancestor of today's micro/clinical practice. Jane Addams is most linked to macro/structural practice.</div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">2</span><p>Which of the following is NOT one of the six core NASW values?</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,2)"><span class="opt-label">A</span> Service</li>
+      <li onclick="mc(this,false,2)"><span class="opt-label">B</span> Integrity</li>
+      <li onclick="mc(this,true,2)"><span class="opt-label">C</span> Empathy</li>
+      <li onclick="mc(this,false,2)"><span class="opt-label">D</span> Social Justice</li>
+    </ul>
+    <div class="explanation" id="exp-2"><strong>EXPLANATION</strong> The six NASW core values are: Service, Social Justice, Dignity &amp; Worth of the Person, Importance of Human Relationships, Integrity, and Competence. "Empathy" — though a critical social work skill — is not listed as a core value. "Altruism" is also commonly confused but is not an official NASW value.</div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">3</span><p>John Rawls's "Difference Principle" states that social and economic inequalities are just ONLY if they:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,3)"><span class="opt-label">A</span> Are the result of individual choices and hard work</li>
+      <li onclick="mc(this,false,3)"><span class="opt-label">B</span> Are distributed equally among all citizens</li>
+      <li onclick="mc(this,true,3)"><span class="opt-label">C</span> Benefit the least advantaged members of society</li>
+      <li onclick="mc(this,false,3)"><span class="opt-label">D</span> Are approved by a democratic majority</li>
+    </ul>
+    <div class="explanation" id="exp-3"><strong>EXPLANATION</strong> Rawls argued that while perfect equality isn't required, any inequality that exists must work to benefit those who are worst off in society. His Principle of Redress also holds that undeserved inequalities (based on birth, luck, natural endowment) should be compensated. This is directly applicable to social work: social workers prioritize the most vulnerable.</div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">4</span><p>In the EBP evidence hierarchy, which type of study provides the STRONGEST evidence for an intervention's effectiveness?</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,4)"><span class="opt-label">A</span> Expert opinion and practice wisdom</li>
+      <li onclick="mc(this,false,4)"><span class="opt-label">B</span> Randomized Controlled Trials (RCTs)</li>
+      <li onclick="mc(this,true,4)"><span class="opt-label">C</span> Systematic reviews and meta-analyses</li>
+      <li onclick="mc(this,false,4)"><span class="opt-label">D</span> Qualitative case studies</li>
+    </ul>
+    <div class="explanation" id="exp-4"><strong>EXPLANATION</strong> Systematic reviews and meta-analyses sit at the top of the evidence hierarchy because they synthesize findings from multiple high-quality studies, producing a more reliable overall picture than any single study. RCTs are strong individually ("gold standard"), but systematic reviews of multiple RCTs are even stronger. Expert opinion is at the bottom.</div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">5</span><p>The "Person-in-Environment" (PIE) framework emphasizes that social workers should:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,5)"><span class="opt-label">A</span> Focus exclusively on changing individual behaviors and thought patterns</li>
+      <li onclick="mc(this,false,5)"><span class="opt-label">B</span> Prioritize policy change over direct client services</li>
+      <li onclick="mc(this,true,5)"><span class="opt-label">C</span> Understand clients within their multiple, nested social contexts — including family, community, and structural systems</li>
+      <li onclick="mc(this,false,5)"><span class="opt-label">D</span> Assess only the immediate presenting problem before intervening</li>
+    </ul>
+    <div class="explanation" id="exp-5"><strong>EXPLANATION</strong> PIE is one of social work's most distinctive contributions. Rather than seeing people as isolated individuals to "fix," PIE situates every person within multiple, nested contexts (micro, mezzo, macro). Effective practice requires attention to all these levels — recognizing how environmental forces create and contribute to problems in living.</div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">6</span><p>According to Abraham Flexner (1915), what was his primary criticism of social work as a profession?</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,6)"><span class="opt-label">A</span> Social workers were too focused on community organizing rather than individual care</li>
+      <li onclick="mc(this,false,6)"><span class="opt-label">B</span> Social workers lacked altruistic motivation</li>
+      <li onclick="mc(this,true,6)"><span class="opt-label">C</span> Social work lacked a distinct, specialized body of scientific knowledge and technique</li>
+      <li onclick="mc(this,false,6)"><span class="opt-label">D</span> Social workers had no professional associations</li>
+    </ul>
+    <div class="explanation" id="exp-6"><strong>EXPLANATION</strong> Flexner's core concern was that social work didn't generate its own distinctive knowledge base — it largely borrowed from psychology, sociology, and medicine. He acknowledged social work's altruism and organization but questioned whether it had the intellectual rigor and specialized technique of established professions. Morris (2008) later argued that Flexner was misread — he valued evolving intellectual judgment, not just positivist science.</div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">7</span><p>Community organizing differs from case advocacy primarily because community organizing:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,7)"><span class="opt-label">A</span> Focuses on solving problems for individual clients</li>
+      <li onclick="mc(this,false,7)"><span class="opt-label">B</span> Is led by professional social workers who identify community needs</li>
+      <li onclick="mc(this,true,7)"><span class="opt-label">C</span> Builds collective power among affected people to demand change, with those affected leading the effort</li>
+      <li onclick="mc(this,false,7)"><span class="opt-label">D</span> Works through legislative lobbying and testimony alone</li>
+    </ul>
+    <div class="explanation" id="exp-7"><strong>EXPLANATION</strong> The key distinction in community organizing is collective action BY those directly affected. Unlike case advocacy (which solves an individual's problem) or policy advocacy (which may be elite-driven), community organizing builds a base of affected people, identifies targets and pressure points, and shifts power to the community itself. The social worker facilitates — they do NOT lead the agenda.</div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">8</span><p>Martha Nussbaum's Capabilities Approach differs from Rawls's theory of justice primarily because Nussbaum focuses on:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,8)"><span class="opt-label">A</span> Designing fair institutional rules and procedures</li>
+      <li onclick="mc(this,true,8)"><span class="opt-label">B</span> What people are actually able to do and be — ensuring a minimum threshold of human capabilities</li>
+      <li onclick="mc(this,false,8)"><span class="opt-label">C</span> Maximizing overall happiness for the greatest number of people</li>
+      <li onclick="mc(this,false,8)"><span class="opt-label">D</span> Distributing equal income to all citizens regardless of need</li>
+    </ul>
+    <div class="explanation" id="exp-8"><strong>EXPLANATION</strong> Rawls focuses on fair procedures and institutions (who gets what resources through just rules). Nussbaum shifts to asking what people can actually do and become — two people with the same income may have vastly different capabilities if one has a disability requiring costly care. Justice, for Nussbaum, requires that every person reach a minimum threshold in each of her 10 central human capabilities.</div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">9</span><p>What is a key tension that arose from social work's effort to "professionalize" after Flexner's 1915 critique?</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,9)"><span class="opt-label">A</span> Social workers became too radical and community-oriented</li>
+      <li onclick="mc(this,true,9)"><span class="opt-label">B</span> The push for scientific legitimacy sometimes came at the cost of social work's grassroots, reform-oriented identity</li>
+      <li onclick="mc(this,false,9)"><span class="opt-label">C</span> Licensure requirements made social work too accessible to diverse practitioners</li>
+      <li onclick="mc(this,false,9)"><span class="opt-label">D</span> The profession lost its focus on individual casework</li>
+    </ul>
+    <div class="explanation" id="exp-9"><strong>EXPLANATION</strong> After Flexner, social work pursued legitimacy through standardized education and psychoanalytic frameworks — often at the expense of its settlement house, reform-oriented roots. Brekke (2012) argued social work still "piggybacks" on other disciplines. The course frames this as an ongoing tension: does becoming more "scientific" narrow social work's moral and political commitments?</div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">10</span><p>According to Hounmenou (2012), Black settlement houses served as "free spaces" because:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,10)"><span class="opt-label">A</span> They operated without any funding constraints or white philanthropic oversight</li>
+      <li onclick="mc(this,false,10)"><span class="opt-label">B</span> They were explicitly endorsed by mainstream white social work organizations</li>
+      <li onclick="mc(this,true,10)"><span class="opt-label">C</span> Racial segregation paradoxically created spaces for collective identity, shared reflection, and the development of oppositional consciousness</li>
+      <li onclick="mc(this,false,10)"><span class="opt-label">D</span> They focused only on providing services, not on political advocacy</li>
+    </ul>
+    <div class="explanation" id="exp-10"><strong>EXPLANATION</strong> Hounmenou's key insight is that despite being constrained by white philanthropic oversight and respectability politics, the segregated nature of these institutions created limited surveillance, cultural safety, and shared experiences of oppression that allowed oppositional consciousness to emerge. Segregation — though oppressive — paradoxically created the conditions for political resistance.</div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">11</span><p>In Cognitive Behavioral Therapy (CBT), the central assumption is that:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,11)"><span class="opt-label">A</span> Problems are primarily rooted in unconscious childhood experiences</li>
+      <li onclick="mc(this,true,11)"><span class="opt-label">B</span> Problems are often rooted in irrational or dysfunctional thinking; thoughts, feelings, and behaviors are interrelated</li>
+      <li onclick="mc(this,false,11)"><span class="opt-label">C</span> Poverty and systemic inequality are the root cause of most mental health struggles</li>
+      <li onclick="mc(this,false,11)"><span class="opt-label">D</span> The client's social network is the primary driver of behavior change</li>
+    </ul>
+    <div class="explanation" id="exp-11"><strong>EXPLANATION</strong> CBT theory (Beck, 2020) posits that cognitions (thoughts), feelings (emotions), and behaviors are all interrelated and mutually influential. Irrational or dysfunctional thinking leads to problems; by identifying and changing those thought patterns, clients can change feelings and behaviors. CBT is used widely across populations and is considered evidence-based for depression, anxiety, and trauma.</div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">12</span><p>Wagner's (1989) three-stage cycle of radical social work movements ends with:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,12)"><span class="opt-label">A</span> Client-led militancy as the dominant form of practice</li>
+      <li onclick="mc(this,false,12)"><span class="opt-label">B</span> Complete overthrow of the professional establishment</li>
+      <li onclick="mc(this,true,12)"><span class="opt-label">C</span> Absorption — radical ideas are partially incorporated into mainstream norms, often losing their transformative edge</li>
+      <li onclick="mc(this,false,12)"><span class="opt-label">D</span> Permanent institutionalization of radical practice frameworks</li>
+    </ul>
+    <div class="explanation" id="exp-12"><strong>EXPLANATION</strong> Wagner's three stages: (1) Client-led militancy — oppressed groups radicalize social workers; (2) Militant professionalism — radicals challenge professional leadership from within; (3) Absorption — radical ideas get incorporated into mainstream norms but lose their transformative edge. This cycle repeats. The question "where is social work in this cycle right now?" is a key course discussion prompt.</div>
+  </div>
+
+  <div id="mc-score" style="display:none; background:var(--warm); border:1px solid var(--border); padding:1rem 1.25rem; margin-top:1rem; font-family:'IBM Plex Mono',monospace; font-size:.85rem;">
+    <strong>YOUR SCORE: <span id="mc-correct">0</span> / <span id="mc-total">0</span> correct</strong>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ SHORT ANSWER -->
+<section id="sa">
+  <div class="section-header">
+    <h2>Short Answer</h2>
+    <span class="week-tag">WRITTEN PRACTICE · WEEKS 2–9</span>
+  </div>
+  <p style="font-size:.85rem; color:var(--gray); margin-bottom:1.5rem;">Write your own answer, then click "Reveal Model Answer" to compare. The exam wants you to show you've internalized concepts — not memorized quotes.</p>
+
+  <div class="sa-block">
+    <div class="sa-header">
+      <span class="sa-type">Week 2 · History</span>
+      <p>Compare the Charity Organization Society (COS) approach to poverty with the Settlement House Movement approach. How do they reflect different understandings of what causes poverty?</p>
+    </div>
+    <textarea class="sa-input" placeholder="Write your answer here..."></textarea>
+    <div class="sa-footer">
+      <span style="font-size:.8rem; color:var(--gray);">Aim for 4–6 sentences using course vocabulary</span>
+      <button class="reveal-btn" onclick="toggleSA(this)">Reveal Model Answer</button>
+    </div>
+    <div class="model-answer">
+      <strong>MODEL ANSWER</strong>
+      The COS approach, associated with Mary Richmond and formalized in <em>Social Diagnosis</em> (1917), understood poverty as primarily resulting from individual moral failings — laziness, intemperance, or poor choices. Their method was to assess individual "worthiness," provide casework, and promote self-sufficiency through personal reform. In contrast, Jane Addams and the Settlement House Movement understood poverty as structural — produced by industrialization, exploitative labor conditions, and unjust systems. Settlement house workers lived alongside immigrant communities, provided education and childcare, but also organized labor unions and advocated for child labor laws and tenement reform. The fundamental difference is the unit of analysis: COS targeted individual character (micro practice), while Settlement Houses targeted neighborhood conditions and policy systems (macro practice). Both traditions persist in social work today, reflecting the ongoing tension between social control and social liberation.
+    </div>
+  </div>
+
+  <div class="sa-block">
+    <div class="sa-header">
+      <span class="sa-type">Week 3 · Professionalization</span>
+      <p>What are two tensions introduced by the "professionalization" of social work that persist today? Use specific examples.</p>
+    </div>
+    <textarea class="sa-input" placeholder="Write your answer here..."></textarea>
+    <div class="sa-footer">
+      <span style="font-size:.8rem; color:var(--gray);">Name and explain two distinct tensions</span>
+      <button class="reveal-btn" onclick="toggleSA(this)">Reveal Model Answer</button>
+    </div>
+    <div class="model-answer">
+      <strong>MODEL ANSWER</strong>
+      <strong>Tension 1 — Gatekeeping vs. Access:</strong> Licensing and credentialing protect the public by ensuring minimum competency, but also create barriers that can exclude talented practitioners from low-income backgrounds or communities of color. The cost of accredited MSW programs, licensing exams, and supervised hours can limit who enters the profession.
+      <br><br>
+      <strong>Tension 2 — Scientific Legitimacy vs. Community Knowledge:</strong> Evidence-based practice improves outcomes, but "valid" research has historically excluded Indigenous knowledge, immigrant wisdom, and community-tested strategies. Brekke (2012) argued social work still borrows its scientific legitimacy from psychology and sociology, rather than producing its own distinctive knowledge — meaning the profession may privilege quantitative research over lived experience and practice wisdom. Both tensions reflect the broader question: in trying to become more "professional," what does social work risk losing?
+    </div>
+  </div>
+
+  <div class="sa-block">
+    <div class="sa-header">
+      <span class="sa-type">Week 4 · Ethics</span>
+      <p>Explain what makes an "ethical dilemma" in social work. Using the Mr. X case (elderly client refusing help while showing cognitive decline), identify the specific dilemma and name the competing NASW standards involved.</p>
+    </div>
+    <textarea class="sa-input" placeholder="Write your answer here..."></textarea>
+    <div class="sa-footer">
+      <span style="font-size:.8rem; color:var(--gray);">Name the specific NASW standards by number or title</span>
+      <button class="reveal-btn" onclick="toggleSA(this)">Reveal Model Answer</button>
+    </div>
+    <div class="model-answer">
+      <strong>MODEL ANSWER</strong>
+      An ethical dilemma occurs when a practitioner faces two or more competing ethical principles, where honoring one value appears to require compromising another. Unlike a clear violation, a dilemma involves tension between two defensible "rights."
+      <br><br>
+      In the Mr. X case, the dilemma is between: <strong>Standard 1.02 (Self-Determination)</strong> — social workers respect and promote clients' right to direct their own lives; Mr. X has clearly stated he wants to remain independent; and <strong>Standard 1.01 (Commitment to Client Well-Being)</strong> — the primary responsibility is to promote client well-being, which may be limited when clients' actions pose serious, foreseeable harm to themselves. Both principles are ethically sound. The challenge isn't choosing right over wrong — it's determining how to honor both when they pull in opposite directions. A good ethical decision-making process involves gathering facts, consulting the code, considering duty-based vs. consequence-based reasoning, exploring biases, and deciding what one can justify to the client, supervisor, and oneself.
+    </div>
+  </div>
+
+  <div class="sa-block">
+    <div class="sa-header">
+      <span class="sa-type">Week 5 · Social Justice</span>
+      <p>Using Rawls's Difference Principle, explain whether the racial wealth gap in the United States constitutes a social injustice. Be specific about what the principle requires.</p>
+    </div>
+    <textarea class="sa-input" placeholder="Write your answer here..."></textarea>
+    <div class="sa-footer">
+      <span style="font-size:.8rem; color:var(--gray);">Apply Rawls directly — what specifically fails his test?</span>
+      <button class="reveal-btn" onclick="toggleSA(this)">Reveal Model Answer</button>
+    </div>
+    <div class="model-answer">
+      <strong>MODEL ANSWER</strong>
+      Rawls's Difference Principle holds that social and economic inequalities are just only if they benefit the least advantaged members of society. His Principle of Redress adds that inequalities based on undeserved factors (birth, race, luck) should be compensated by society. Applied to the racial wealth gap — where the median white family holds roughly 10x the wealth of the median Black family — this gap fails Rawls's test on multiple counts: First, the inequality does not benefit the least advantaged; it actively concentrates resources among already advantaged groups. Second, the gap is produced by undeserved structural factors: historical exclusion from homeownership (redlining), discriminatory lending, and intergenerational wealth denial — not individual choice. Third, the conditions for fair equality of opportunity (Rawls's second principle) were not and are not met. By Rawlsian standards, the racial wealth gap is an injustice that demands redress through compensatory policies.
+    </div>
+  </div>
+
+  <div class="sa-block">
+    <div class="sa-header">
+      <span class="sa-type">Week 6 · Multi-Level Practice</span>
+      <p>Explain why multi-level practice is essential in social work, using a specific example to show how micro, mezzo, and macro levels interact.</p>
+    </div>
+    <textarea class="sa-input" placeholder="Write your answer here..."></textarea>
+    <div class="sa-footer">
+      <span style="font-size:.8rem; color:var(--gray);">Show how one level affects the others — use a case example</span>
+      <button class="reveal-btn" onclick="toggleSA(this)">Reveal Model Answer</button>
+    </div>
+    <div class="model-answer">
+      <strong>MODEL ANSWER</strong>
+      Multi-level practice recognizes that individual struggles often reflect systemic failures, and that sustainable change requires simultaneous intervention at individual, organizational, and systemic levels. Consider Maya (15-year-old from the school case): at the micro level, she needs counseling for depression and family stress management. At the mezzo level, the school's truancy system is sending threatening letters without understanding her structural constraints — organizational policy reform is needed. At the macro level, the subsidized childcare center closed due to state funding cuts, and the bus route serving their neighborhood was eliminated — these are policy failures requiring advocacy and systemic reform. Intervening only at the micro level (counseling Maya) does nothing about the childcare gap driving her absences, and does nothing about the transit policy. Multi-level thinking reveals root causes that single-level analysis misses and produces more durable change.
+    </div>
+  </div>
+
+  <div class="sa-block">
+    <div class="sa-header">
+      <span class="sa-type">Week 9 · Macro Practice</span>
+      <p>What is the social worker's role in community organizing, and how does it differ from the role in direct service? Why does Zelnick et al. argue that "our jobs aren't apolitical"?</p>
+    </div>
+    <textarea class="sa-input" placeholder="Write your answer here..."></textarea>
+    <div class="sa-footer">
+      <span style="font-size:.8rem; color:var(--gray);">Address the organizer's role AND the political argument</span>
+      <button class="reveal-btn" onclick="toggleSA(this)">Reveal Model Answer</button>
+    </div>
+    <div class="model-answer">
+      <strong>MODEL ANSWER</strong>
+      In community organizing, the social worker's role is fundamentally different from direct service: rather than providing help to individuals, the organizer facilitates collective action by the affected community itself. The organizer identifies natural leaders, builds relationships through one-on-one conversations, conducts power analysis (who can turn "No" into "Yes"?), helps strategize pressure tactics, and asks powerful questions — but does NOT decide the agenda, take credit for victories, or speak for the community. This represents a shift from "helping" to "liberating."
+      <br><br>
+      Zelnick et al. (2022) argue that social workers are often the first to witness systemic failures in clients' lives — inadequate housing, food insecurity, discriminatory policies — that therapy alone cannot address. When social workers see these patterns, their ethical obligation extends beyond the therapy room. Refusing to act on structural injustice is itself a political choice that maintains the status quo. The tension they name is working within the "Nonprofit Industrial Complex" — institutions that claim to serve communities but may maintain control over them — while still organizing for liberation.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ VIGNETTES -->
+<section id="vignettes">
+  <div class="section-header">
+    <h2>Vignette Practice</h2>
+    <span class="week-tag">EXAM FORMAT · APPLY FRAMEWORKS</span>
+  </div>
+
+  <div class="callout">
+    <strong>How the exam works:</strong> You'll receive ONE topic/issue and be asked to apply broad concepts from class. These vignettes mirror that format. For each case, use course frameworks — PIE, multi-level practice, NASW values, social justice theories, EBP, etc. — to analyze and propose responses.
+  </div>
+
+  <!-- VIGNETTE 1: ROSA MEDINA (used in actual review slides) -->
+  <div class="vignette">
+    <div class="vignette-banner">
+      <span class="v-icon">📋</span>
+      <div>
+        <h3>Vignette 1: Rosa Medina — Housing, Displacement &amp; Multi-Level Practice</h3>
+        <div style="font-size:.75rem; color:#c0b8a8; margin-top:.2rem;">★ This case was used in the actual midterm review sessions</div>
+      </div>
+    </div>
+    <div class="vignette-scenario">
+      <span class="client-tag">Client Scenario</span>
+      <p>Rosa Medina is a 38-year-old Latina woman living in a mid-sized U.S. city. She was the first in her family to attend college, earning an associate's degree in business. For twelve years she worked as an office manager at a manufacturing plant. Three years ago, the plant permanently closed, eliminating Rosa's job along with 400 others. Unemployment benefits ran out after six months. Since then she has worked part-time jobs — cashier, home health aide, delivery driver — none offering benefits, consistent hours, or wages above $14/hr.</p>
+      <br>
+      <p>Last year, Rosa's landlord raised her rent from $950 to $1,400/month. After three months of late payments and one eviction notice, Rosa moved her two teenage children into her sister's two-bedroom apartment. Five people share the space; Rosa sleeps on the couch.</p>
+      <br>
+      <p>Rosa has been referred to the Southside Family Resource Center after her 15-year-old son Diego showed frequent absences and withdrawal at school. During intake, Rosa appears exhausted and says: <em>"I've worked my whole life. I don't want to be a burden to anyone."</em> She reports significant anxiety, hasn't seen a doctor in two years (lost health insurance when plant closed), is behind on car payments, and has not enrolled in any public assistance programs because she didn't know she might be eligible and felt ashamed to ask.</p>
+    </div>
+    <div class="vignette-questions">
+      <h4>Apply the Frameworks — Answer Each Question</h4>
+
+      <div class="v-question">
+        <p class="q-text">1. Using the Person-in-Environment (PIE) framework, identify at least three structural/systemic factors (not personal failings) contributing to Rosa's situation. Which populations do these structures disproportionately affect?</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Apply PIE — think structures, not individual choices..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Structural factors (PIE lens):</strong>
+          <br>• Housing instability / near-homelessness — produced by market-rate rent increases and lack of tenant protections
+          <br>• Job displacement and wage stagnation — manufacturing closures eliminate stable, working-class employment
+          <br>• Lack of healthcare access — employment-based insurance system leaves workers uninsured when jobs disappear
+          <br>• Child welfare concerns — Diego's school struggles are downstream of housing instability, not a behavioral problem
+          <br>• Benefit system barriers — complex eligibility rules and stigma prevent qualified people from accessing support
+          <br><br>
+          <strong>Disproportionately affected populations:</strong> Latina women (higher rates of housing cost burden), working-class communities (hit hardest by manufacturing closures), low-income adults (highest uninsured rates), children in unstable housing (higher rates of school absence and anxiety). This is NOT individual failure — these are structural patterns.
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">2. As a micro-level social worker (case manager), what are your IMMEDIATE priorities upon meeting Rosa? What roles would you perform? Apply the 7-step direct practice process.</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Name specific roles and steps..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Engagement:</strong> Build rapport with genuine warmth; acknowledge Rosa's hard work and the structural injustice of her situation. Do not pathologize her shame — contextualize it as a normal response to stigma around poverty.
+          <br><br>
+          <strong>Assessment (biopsychosocial):</strong> Understand all dimensions of her situation — housing, income, health, mental health, children's needs, social support. Use the PHQ-9 to screen for depression. Conduct PIE assessment of barriers and strengths.
+          <br><br>
+          <strong>Case Manager roles:</strong>
+          <br>• Resource broker: Connect Rosa to SNAP/EBT, Medi-Cal, America's Job Centers, emergency rental assistance, school support for Diego
+          <br>• Care coordinator: Coordinate referrals across service providers
+          <br>• Case advocate: Defend Rosa's right to benefits, advocate for fair housing, connect Diego to school counseling and tutoring
+          <br>• People changer (if licensed): CBT for anxiety/depression; family therapy
+          <br><br>
+          <strong>Planning:</strong> Collaboratively set SMART goals — e.g., "Apply for Medi-Cal within 2 weeks"; "Meet with school counselor about Diego by [date]"
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">3. Apply Rawls's Difference Principle to Rosa's case. What specific inequalities exist? Do they benefit the least advantaged? What would Rawls say justice requires?</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Use Rawls directly..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          Rawls's Difference Principle states inequalities are just only if they benefit the least advantaged. Applied to Rosa's case:
+          <br><br>
+          The inequalities present — wage stagnation, the absence of portable healthcare, weak tenant protections, and a safety net that Rosa couldn't easily navigate — do NOT benefit the least advantaged; they actively harm them. Rosa's struggles stem not from personal failings but from undeserved structural disadvantages: the plant closure (not her choice), a system that ties healthcare to employment, a housing market without adequate protections, and benefits that require navigation of complex, stigmatizing bureaucracy.
+          <br><br>
+          Rawls's Principle of Redress further requires that undeserved disadvantages be compensated. His verdict: Rosa's situation is unjust. Justice would require: living wages and portable benefits, affordable housing policies, accessible healthcare regardless of employment status, and safety net systems designed to be navigable without shame. Social workers embody the Difference Principle by prioritizing clients like Rosa and advocating for these structural changes.
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">4. What would a MACRO-level social worker do to address the root causes producing situations like Rosa's? Describe at least two macro-level roles and specific actions.</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Think policy, community organizing, structural analysis..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Policy Advocate:</strong> Lobby legislators for expanded SNAP eligibility, childcare subsidies, and tenant protection laws. Advocate for healthcare decoupled from employment (Medicaid expansion). Testify at city council hearings about the impact of rent increases on working families. Document how manufacturing closures without worker safety nets create downstream crises for families of color.
+          <br><br>
+          <strong>Community Organizer:</strong> Build coalitions with other displaced manufacturing workers and Latina families facing housing insecurity. Conduct power analysis — who controls housing policy in this city? Who can make affordable housing happen? Help affected families organize collectively to pressure housing authorities and landlords. Center the voices of those affected; don't speak for them.
+          <br><br>
+          <strong>Program Developer:</strong> Create bilingual job training programs and culturally adapted mental health services that specifically address the barriers Latina women face (language, immigration status concerns, cultural stigma around mental health).
+          <br><br>
+          All of these shrink the scope of the underlying problem — they don't just address Rosa's individual symptoms, they target root causes.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIGNETTE 2: MAYA (school case) -->
+  <div class="vignette">
+    <div class="vignette-banner">
+      <span class="v-icon">🏫</span>
+      <div>
+        <h3>Vignette 2: Maya — School Social Work &amp; Systems-Ecological Practice</h3>
+        <div style="font-size:.75rem; color:#c0b8a8; margin-top:.2rem;">Week 6 Case Study</div>
+      </div>
+    </div>
+    <div class="vignette-scenario">
+      <span class="client-tag">Client Scenario</span>
+      <p>Maya is a 15-year-old sophomore who, until recently, was an honors student with a 3.8 GPA passionate about the debate team. Over the last six weeks, her attendance has plummeted — she has missed 12 days and is failing Algebra II. The school's automated truancy system triggered a formal warning letter citing potential legal intervention.</p>
+      <br>
+      <p>Maya lives with her mother Elena (who works two hourly jobs) and 4-year-old brother Leo. Two months ago, the subsidized childcare center Leo attended closed due to loss of state funding. Elena now relies on Maya to stay home during the gap hours between her shifts. The family lives in a transit desert — the city bus route Maya used was recently eliminated due to municipal budget cuts, and the school also canceled its Late Bus program.</p>
+      <br>
+      <p>When meeting the school social worker, Maya appears exhausted with frequent headaches. She says: <em>"I can't leave my brother alone, and my mom can't lose her job or we'll be evicted."</em> She has stopped responding to friends because she feels "embarrassed" and "like a failure." She wants to go to college but now feels it is "impossible."</p>
+    </div>
+    <div class="vignette-questions">
+      <h4>Apply the Frameworks</h4>
+
+      <div class="v-question">
+        <p class="q-text">1. Map the systems: Identify at least three factors at EACH level (micro, mezzo, macro) affecting Maya's situation.</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="List factors at each level..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Micro (individual/family):</strong> Maya's exhaustion and headaches, depression/shame, loss of social connections; Elena's precarious employment and housing stress; Leo's lack of childcare; family communication under severe stress
+          <br><br>
+          <strong>Mezzo (organizations/community):</strong> School's automated truancy system sending threatening letters without understanding context; school cancellation of Late Bus program; absence of after-school resources; no alternative childcare agency in the area
+          <br><br>
+          <strong>Macro (systems/policy):</strong> State funding cuts eliminating the subsidized childcare center; municipal budget cuts eliminating the bus route; housing market producing eviction threat; policy design that punishes rather than supports families in crisis; lack of adequate working-family support systems
+          <br><br>
+          <strong>Key interaction:</strong> The macro-level childcare funding cut created a mezzo-level gap (no childcare center), which created a micro-level reality (Maya must stay home), which the school system treated as an individual behavioral problem. Without a systems lens, Maya gets punished; with it, social workers can intervene at all levels.
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">2. As Maya's school social worker, what is one micro, one mezzo, and one macro intervention you would pursue? Connect each to NASW core values.</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="One intervention at each level + NASW value..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Micro:</strong> Provide individual counseling to help Maya process shame and rebuild her sense of self-efficacy. Use CBT to challenge the thought pattern that she is "a failure" and to separate her worth from her circumstances. <em>NASW Value: Dignity &amp; Worth of the Person — respect Maya's inherent worth and help her reconnect with her goals.</em>
+          <br><br>
+          <strong>Mezzo:</strong> Advocate within the school to halt or pause the truancy warning letter; meet with administration to explain the structural context and prevent punitive measures. Propose a modified attendance plan that accommodates Maya's caregiving responsibilities. <em>NASW Value: Social Justice — challenge institutional processes that harm vulnerable students.</em>
+          <br><br>
+          <strong>Macro:</strong> Document this case and others like it to build evidence for a policy proposal to restore after-school childcare subsidies or emergency transportation funds. Join a coalition advocating for working-family policies at the city or state level. <em>NASW Value: Service — using professional knowledge to address root causes, not just symptoms.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIGNETTE 3: POSTPARTUM DEPRESSION / EBP -->
+  <div class="vignette">
+    <div class="vignette-banner">
+      <span class="v-icon">🧠</span>
+      <div>
+        <h3>Vignette 3: Maya (29) — Evidence-Based Practice &amp; Cultural Competence</h3>
+        <div style="font-size:.75rem; color:#c0b8a8; margin-top:.2rem;">Week 8 Case Study — EBP in Practice</div>
+      </div>
+    </div>
+    <div class="vignette-scenario">
+      <span class="client-tag">Client Scenario</span>
+      <p>Maya is a 29-year-old first-time mother who immigrated from a collectivist culture five years ago. She is six months postpartum and reports persistent feelings of worthlessness, extreme fatigue, and a "frightening" lack of connection to her infant. Her primary care physician recommended antidepressants, but Maya is breastfeeding and deeply concerned about the "shame" of medication in her community. She wants a "natural" or talk-based solution but feels overwhelmed by options. She is culturally isolated, with limited family support in the U.S.</p>
+    </div>
+    <div class="vignette-questions">
+      <h4>Apply the EBP Framework</h4>
+
+      <div class="v-question">
+        <p class="q-text">1. Walk through the 5-step EBP process for Maya's case. What question would you "Ask"? What would you look for when you "Appraise" the evidence?</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Apply Ask → Acquire → Appraise → Apply → Audit..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Ask:</strong> "For a postpartum immigrant woman from a collectivist culture who refuses medication and is breastfeeding, what non-pharmacological interventions are most effective for postpartum depression?"
+          <br><br>
+          <strong>Acquire:</strong> Search Cochrane Library, Campbell Collaboration for systematic reviews on postpartum depression; look specifically for studies including immigrant women and culturally adapted CBT.
+          <br><br>
+          <strong>Appraise:</strong> Evaluate (1) strength of evidence — systematic review &gt; RCTs &gt; quasi-experimental; (2) applicability — were women from collectivist cultures included in the sample? If the "gold standard" evidence is from white, Western, middle-class populations, its generalizability to Maya is limited; (3) cultural fit — does the intervention account for Maya's values, family structure, and cultural understanding of mental health?
+          <br><br>
+          <strong>Apply:</strong> Implement collaboratively — discuss options with Maya, involve her preferences and cultural framework. CBT adapted for postpartum depression may be appropriate; group therapy with other immigrant mothers may also reduce isolation.
+          <br><br>
+          <strong>Audit:</strong> Use PHQ-9 or Edinburgh Postnatal Depression Scale at intervals to measure outcomes; adjust plan based on Maya's feedback and changing circumstances.
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">2. The Cochrane Library indicates that medication + CBT is the "gold standard" for postpartum depression, but Maya refuses medication. Is it ethical to proceed with a "lesser" evidence-based option? Explain using NASW values.</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Apply NASW values to this ethical question..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          Yes — it is both ethical and appropriate to proceed with a non-medication intervention when a client refuses medication for informed, culturally grounded reasons. Here's why:
+          <br><br>
+          <strong>Self-Determination (Standard 1.02):</strong> Social workers respect and promote clients' right to direct their own lives. Maya's refusal is not irrational — it is informed by her cultural context, breastfeeding concerns, and community relationships. Overriding her stated wishes to apply the "gold standard" would violate this core standard.
+          <br><br>
+          <strong>Cultural Competence (Standard 1.05):</strong> Social workers must understand culture and its function in human behavior. In Maya's cultural context, the shame associated with psychiatric medication is a real barrier that affects treatment engagement. Ignoring it doesn't make it disappear — it makes Maya less likely to engage with any treatment.
+          <br><br>
+          <strong>Dignity &amp; Worth:</strong> The three pillars of EBP are research evidence, client values and preferences, AND clinical expertise — all three must be balanced. A "weaker" evidence-based intervention that Maya will actually engage with is more effective than a "stronger" one she will refuse. EBP is a tool to enhance judgment, not replace it.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIGNETTE 4: Community Organizing -->
+  <div class="vignette">
+    <div class="vignette-banner">
+      <span class="v-icon">✊</span>
+      <div>
+        <h3>Vignette 4: East Oakland Food Justice — Community Organizing</h3>
+        <div style="font-size:.75rem; color:#c0b8a8; margin-top:.2rem;">Week 9 · Strategy Session Case</div>
+      </div>
+    </div>
+    <div class="vignette-scenario">
+      <span class="client-tag">Community Scenario</span>
+      <p>You are a social worker at a Family Resource Center in East Oakland, at 66th Ave and International Blvd — a high-density neighborhood classified as a "food desert" with limited access to fresh, affordable produce. Many families rely on food banks and corner stores with processed foods. Residents want to convert part of an underutilized city park into a community garden. The Parks &amp; Recreation Department said "No," citing maintenance, liability, and existing programming concerns. You want to help the community turn that "No" into a "Yes."</p>
+    </div>
+    <div class="vignette-questions">
+      <h4>Apply the Organizing Framework</h4>
+
+      <div class="v-question">
+        <p class="q-text">1. Conduct a power analysis: Who is your primary target (who can actually make this decision)? Who are secondary targets? What might be their vulnerabilities or pressure points?</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Primary target → secondary targets → leverage points..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Primary target:</strong> The Parks &amp; Recreation Department Director (or City Council member who oversees the department) — someone with actual authority to reverse the "No," not the staff person who said it.
+          <br><br>
+          <strong>Secondary targets:</strong> City Council member(s) representing the district; the Mayor (who oversees city departments); budget committee members (parks funding flows through them); community allies who can apply political pressure.
+          <br><br>
+          <strong>Leverage points / vulnerabilities:</strong>
+          <br>• Reputation: Public officials care about media coverage; "City blocks food garden for food-insecure families" is a bad headline.
+          <br>• Elections: Council members are accountable to voters; organized constituents showing up at town halls and voting against incumbents is real pressure.
+          <br>• Budget hearings: If the community can show up en masse at budget hearings, it demonstrates political will.
+          <br>• Existing city policies: Does the city have food security or equity commitments? If so, that's leverage — the refusal contradicts stated policy.
+          <br>• Liability concerns can often be addressed through community management agreements — this may be a negotiating opening.
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">2. What is your role as the social worker in this campaign? What should you NOT do, and what SHOULD you do? Connect to the ethical tensions in organizing.</p>
+        <textarea class="sa-input" style="min-height:80px;" placeholder="Role of the organizer + ethical tensions..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>What you should NOT do:</strong>
+          <br>• Do not decide the strategy or tactics for the community — that disempowers them and replicates the power dynamic you're trying to challenge.
+          <br>• Do not speak for community members in public settings without their explicit consent.
+          <br>• Do not expose community members to retaliation risks without their informed consent.
+          <br>• Do not take credit for victories — this is their campaign.
+          <br><br>
+          <strong>What you SHOULD do:</strong>
+          <br>• Build relationships through one-on-one conversations with residents to understand their stake in the issue.
+          <br>• Identify and support natural community leaders — who already has trust and credibility?
+          <br>• Provide training and resources (power analysis training, meeting facilitation, media literacy).
+          <br>• Ask powerful questions that help the community understand the power dynamics.
+          <br><br>
+          <strong>Ethical tensions:</strong>
+          <br>• Boundary confusion: Your agency role (resource provider) may conflict with your organizing role (pressure-campaign supporter).
+          <br>• Confidentiality: When personal stories enter public action, you must ensure explicit consent.
+          <br>• Nonprofit industrial complex (Zelnick): Your paycheck may come from institutions that are themselves invested in maintaining the status quo — this is a real tension to navigate honestly.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIGNETTE 5: MR. X ETHICS -->
+  <div class="vignette">
+    <div class="vignette-banner">
+      <span class="v-icon">⚖️</span>
+      <div>
+        <h3>Vignette 5: Mr. X — Ethical Dilemma in Elder Care</h3>
+        <div style="font-size:.75rem; color:#c0b8a8; margin-top:.2rem;">Week 4 · Ethical Decision-Making</div>
+      </div>
+    </div>
+    <div class="vignette-scenario">
+      <span class="client-tag">Client Scenario</span>
+      <p>You are a social worker at a senior housing complex. Mr. X, an 82-year-old resident, lives independently and has done so for 15 years. Over the past six months, neighbors report him leaving the stove on, forgetting medications, difficulty with hygiene, wandering outside at night disoriented, and a recent fall causing minor injury. When you meet with him to discuss concerns, he is adamant: <em>"This is my home. I've lived here 15 years. I'm fine."</em> He refuses in-home care or assisted living. The facility director is pressuring you to "do something." Family members out of state have mixed opinions.</p>
+    </div>
+    <div class="vignette-questions">
+      <h4>Navigate the Ethical Dilemma</h4>
+
+      <div class="v-question">
+        <p class="q-text">1. Name the ethical dilemma precisely. What two NASW standards are in tension? Use the language of the Code of Ethics.</p>
+        <textarea class="sa-input" style="min-height:70px;" placeholder="Name the dilemma and cite the specific NASW standards..."></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          The dilemma: tension between <strong>Standard 1.02 (Self-Determination)</strong> — social workers respect and promote the right of clients to self-determination, including the right to make decisions about their own lives — and <strong>Standard 1.01 (Commitment to Client Well-Being)</strong> — social workers' primary responsibility is to promote client well-being, which may be limited when clients' actions pose serious, foreseeable harm to themselves or others.
+          <br><br>
+          This is a genuine dilemma because BOTH principles are ethically sound. It is not a question of right vs. wrong — it is a question of how to honor both values when they pull in opposite directions. Mr. X has a right to decide how he lives; the social worker has an obligation to protect his well-being. There is no formula — ethical reasoning, not rule-following, is required.
+        </div>
+      </div>
+
+      <div class="v-question">
+        <p class="q-text">2. Apply Gewirth's hierarchy and Dolgoff et al.'s principle hierarchy to this case. What do they suggest about which value should take priority?</p>
+        <textarea class="sa-input" style="min-height:70px;" placeholder="Apply the hierarchies — which principle wins?"></textarea>
+        <button class="reveal-btn" style="margin-top:.5rem;" onclick="toggleSA(this)">Reveal Answer</button>
+        <div class="model-answer">
+          <strong>MODEL ANSWER</strong>
+          <strong>Gewirth's hierarchy:</strong> Basic goods (life, safety, health) sit at the top — they are prerequisites for any action at all. Non-subtractive goods (autonomy, rights) are important but secondary. Additive goods (quality of life, self-esteem) come last. Applied here: Mr. X's physical safety (wandering at night, stove left on, falls) represents a basic goods concern that is higher in the hierarchy than his autonomy (a non-subtractive good).
+          <br><br>
+          <strong>Dolgoff et al.'s hierarchy:</strong> (1) Protection of life is highest; (3) Autonomy and freedom is third; (5) Quality of life is fifth. This also suggests that if there is genuine risk to Mr. X's life, that concern ranks above his autonomy.
+          <br><br>
+          <strong>However:</strong> these hierarchies are tools for reasoning, not automatic answers. The social worker still must assess: How imminent is the danger? Has Mr. X been assessed for cognitive capacity? Are there harm-reduction alternatives that preserve autonomy while addressing safety? (e.g., medication management, stove shut-off device, check-in system) The hierarchy guides, but professional judgment, additional information, and creative alternatives must also be considered.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ ETHICS DEEP DIVE -->
+<section id="ethics">
+  <div class="section-header">
+    <h2>Ethics Deep Dive</h2>
+    <span class="week-tag">WEEKS 4–5 · NASW CODE</span>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">NASW Areas of Ethical Responsibility</h3>
+  <table>
+    <thead><tr><th>Area</th><th>Standards</th><th>Key Concepts</th></tr></thead>
+    <tbody>
+      <tr><td><strong>To Clients</strong></td><td>1.01–1.16</td><td>Commitment, self-determination, informed consent, cultural competence, confidentiality</td></tr>
+      <tr><td><strong>To Colleagues</strong></td><td>2.01–2.11</td><td>Respect, confidentiality, consultation, professional boundaries</td></tr>
+      <tr><td><strong>In Practice Settings</strong></td><td>3.01–3.10</td><td>Supervision, education, performance evaluation, agency policies</td></tr>
+      <tr><td><strong>As Professionals</strong></td><td>4.01–4.08</td><td>Competence, honesty, private conduct, impairment</td></tr>
+      <tr><td><strong>To the Profession</strong></td><td>5.01–5.02</td><td>Integrity, evaluation and research</td></tr>
+      <tr><td><strong>To Society</strong></td><td>6.01–6.04</td><td>Social welfare, public participation, social justice</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">Duty-Based vs. Consequence-Based Ethics</h3>
+  <div class="grid-2">
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-teal"></div>
+      <h3>Deontological (Duty-Based)</h3>
+      <p><strong>Focus:</strong> Principles, rights, inherent duties</p>
+      <p style="margin-top:.5rem;"><strong>Key Question:</strong> What does this person have a right to? What is my obligation regardless of outcome?</p>
+      <p style="margin-top:.5rem;"><strong>Example:</strong> "Mr. X has a fundamental right to self-determination. Even if the outcome might be harmful, I must respect his autonomy."</p>
+      <p style="margin-top:.5rem; font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--gray);">Philosophers: Kant, W.D. Ross</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-rust"></div>
+      <h3>Teleological (Consequence-Based)</h3>
+      <p><strong>Focus:</strong> Outcomes, harms, benefits, results</p>
+      <p style="margin-top:.5rem;"><strong>Key Question:</strong> What action will produce the best overall outcome or minimize harm?</p>
+      <p style="margin-top:.5rem;"><strong>Example:</strong> "If we allow Mr. X to live unsupervised, the likely outcome is serious injury. Restricting autonomy prevents greater harm."</p>
+      <p style="margin-top:.5rem; font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--gray);">Philosophers: Mill (Utilitarianism)</p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">Quick Ethics Practice Questions</h3>
+
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">E1</span><p>An ethical dilemma is best described as a situation where:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,'e1')"><span class="opt-label">A</span> A social worker knows the right answer but doesn't want to implement it</li>
+      <li onclick="mc(this,false,'e1')"><span class="opt-label">B</span> A client is clearly engaging in illegal behavior</li>
+      <li onclick="mc(this,true,'e1')"><span class="opt-label">C</span> Two or more legitimate ethical principles are in conflict, where honoring one requires compromising another</li>
+      <li onclick="mc(this,false,'e1')"><span class="opt-label">D</span> A social worker disagrees with a supervisor's decision</li>
+    </ul>
+    <div class="explanation" id="exp-e1"><strong>EXPLANATION</strong> Real ethical dilemmas involve genuine tension between two "rights" — not an obvious choice between right and wrong. The word "dilemma" (from Greek: "two horns") captures this: you are caught between two difficult choices, and either direction has ethical weight. If the answer is obvious, it's not truly a dilemma.</div>
+  </div>
+
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">E2</span><p>The NABSW (National Association of Black Social Workers) Code of Ethics is notable because it:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,'e2')"><span class="opt-label">A</span> Focuses exclusively on clinical therapy techniques</li>
+      <li onclick="mc(this,true,'e2')"><span class="opt-label">B</span> Explicitly centers racial justice, stating that the primary obligation is the welfare of the Black individual, family, and community</li>
+      <li onclick="mc(this,false,'e2')"><span class="opt-label">C</span> Applies only to social workers working in government agencies</li>
+      <li onclick="mc(this,false,'e2')"><span class="opt-label">D</span> Replaces the NASW Code for Black social workers</li>
+    </ul>
+    <div class="explanation" id="exp-e2"><strong>EXPLANATION</strong> The NABSW Code explicitly states that practitioners' "primary obligation is the welfare of the Black individual, Black family, and Black community." This demonstrates how centering specific communities and racial justice can shift what counts as "ethical" — foregrounding what might remain invisible in more general, universalist codes. The IFSW Global Code similarly centers human rights and social justice at the international level.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ SOCIAL JUSTICE -->
+<section id="justice">
+  <div class="section-header">
+    <h2>Social Justice Frameworks</h2>
+    <span class="week-tag">WEEK 5 · RAWLS · SEN · NUSSBAUM · CARE</span>
+  </div>
+
+  <div class="callout">
+    <strong>Key distinction:</strong> Social injustice (structural, group-based) ≠ individual injustice (one person wronging another). Social work focuses on social injustice — patterns built into institutions and systems that disadvantage entire groups based on identity, status, or circumstances beyond individual control.
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1rem 0 .75rem;">Equality vs. Equity</h3>
+  <div class="grid-2">
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-teal"></div>
+      <h3>Equality</h3>
+      <p>Same resources for everyone. Treats people identically regardless of starting point.</p>
+      <p style="margin-top:.5rem;"><em>May perpetuate existing disadvantages. Simpler to implement.</em></p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-rust"></div>
+      <h3>Equity</h3>
+      <p>Resources adjusted to needs. Calibrated to help everyone reach fair outcomes, accounting for different starting points.</p>
+      <p style="margin-top:.5rem;"><em>Recognizes different needs; aims for fair outcomes. Requires nuanced assessment.</em></p>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; margin:1.5rem 0 .75rem;">Applying Frameworks: Is This a Social Injustice?</h3>
+
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">J1</span><p>A Rawlsian analysis of mass incarceration in the U.S. (which disproportionately affects Black and low-income communities) would conclude that:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,'j1')"><span class="opt-label">A</span> It is just because the criminal justice system applies the same laws to everyone equally</li>
+      <li onclick="mc(this,true,'j1')"><span class="opt-label">B</span> It is unjust because it constitutes an undeserved disadvantage based on race and class that does not benefit the least advantaged, and fair equality of opportunity is not genuinely accessible</li>
+      <li onclick="mc(this,false,'j1')"><span class="opt-label">C</span> It is a social problem but not a social injustice, since individuals chose to commit crimes</li>
+      <li onclick="mc(this,false,'j1')"><span class="opt-label">D</span> It is just as long as basic liberties are formally guaranteed to all citizens</li>
+    </ul>
+    <div class="explanation" id="exp-j1"><strong>EXPLANATION</strong> Rawls tests whether inequalities benefit the least advantaged and whether access is genuinely fair. Mass incarceration fails both tests: (1) it does not benefit those most disadvantaged; it concentrates disadvantage further — removing people from communities, families, and employment. (2) The conditions producing incarceration (poverty, inadequate schools, discrimination in policing) mean that access to opportunity is not genuinely equal. Rawls's Principle of Redress would also require compensation for inequalities based on undeserved social position.</div>
+  </div>
+
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">J2</span><p>Sen's Capabilities Approach would say that two people receiving the same monthly income are NOT equally situated if:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,'j2')"><span class="opt-label">A</span> One person lives in a more expensive city</li>
+      <li onclick="mc(this,true,'j2')"><span class="opt-label">B</span> One person has a disability requiring expensive care, leaving them with fewer real capabilities despite equal income</li>
+      <li onclick="mc(this,false,'j2')"><span class="opt-label">C</span> One person works longer hours to earn that income</li>
+      <li onclick="mc(this,false,'j2')"><span class="opt-label">D</span> One person saves more of their income than the other</li>
+    </ul>
+    <div class="explanation" id="exp-j2"><strong>EXPLANATION</strong> Sen's core insight is that resources alone don't capture what people can actually do and be. Two people with identical incomes may have vastly different capabilities if one needs expensive medication or assistive devices. Justice requires looking at actual functioning and freedom — the real opportunity to achieve what one has reason to value — not just resource distribution.</div>
+  </div>
+
+  <div class="quiz-block">
+    <div class="q-header"><span class="q-num">J3</span><p>Care ethics (Noddings) differs most fundamentally from distributive justice frameworks (Rawls, Sen) by:</p></div>
+    <ul class="options-list">
+      <li onclick="mc(this,false,'j3')"><span class="opt-label">A</span> Focusing on equal distribution of resources across society</li>
+      <li onclick="mc(this,false,'j3')"><span class="opt-label">B</span> Emphasizing individual rights and liberties above all else</li>
+      <li onclick="mc(this,true,'j3')"><span class="opt-label">C</span> Starting from human interdependence and relationships rather than rules or resource allocation; centering the moral value of caring work</li>
+      <li onclick="mc(this,false,'j3')"><span class="opt-label">D</span> Applying only to private, family-based caregiving relationships</li>
+    </ul>
+    <div class="explanation" id="exp-j3"><strong>EXPLANATION</strong> Care ethics begins with the observation that humans are inherently interdependent — not autonomous individuals. It centers relationships, vulnerability, and the emotional/relational labor that sustains human life (often feminized and racialized). Distributive justice frameworks tend to assume independent, rational actors operating within institutions. Care ethics asks: who cares for whom, under what conditions, and how is that work valued? Combined with Social Reproduction Theory, it reveals that capitalism exploits the moral imperative to care.</div>
+  </div>
+
+  <hr>
+  <h3 style="font-family:'Playfair Display',serif; margin:.75rem 0;">The Individualist vs. Structuralist Distinction</h3>
+  <div class="grid-2">
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-gray"></div>
+      <h3>Individualist Narrative</h3>
+      <p>Places focus only on the individual — personal choice, responsibility, or misfortune. "She made bad decisions." "He should have worked harder."</p>
+      <p style="margin-top:.5rem; font-style:italic; color:var(--gray);">When useful: understanding personal agency. When harmful: ignores structural barriers, pathologizes poverty.</p>
+    </div>
+    <div class="card" style="padding-left:1.75rem;"><div class="accent-bar accent-rust"></div>
+      <h3>Structuralist Narrative</h3>
+      <p>Places focus on systemic factors — systemic racism, institutional inequality, structural barriers. "Housing policy produced this crisis."</p>
+      <p style="margin-top:.5rem; font-style:italic; color:var(--gray);">Social work's distinctive contribution: structural competency — understanding how structures produce "where clients are."</p>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:1rem;">
+    <strong>Structural competency</strong> means we assess the historical, philosophical, ethical, political, and social implications of a client's situation — not just the immediate presenting problem. "Meet the client where they are" requires understanding structurally HOW they got there.
+  </div>
+</section>
+
+</main>
+
+<!-- ── SCORE TRACKER ── -->
+<div id="score-tracker">
+  Score: <span id="score-display">0 / 0</span>
+</div>
+
+<script>
+  let totalAnswered = 0;
+  let totalCorrect = 0;
+
+  function showSection(id, btn) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function mc(el, isCorrect, qNum) {
+    const list = el.closest('ul');
+    // If already answered
+    if (list.dataset.answered) return;
+    list.dataset.answered = 'true';
+
+    const expId = 'exp-' + qNum;
+    const exp = document.getElementById(expId);
+
+    // Mark all options
+    list.querySelectorAll('li').forEach(li => {
+      if (li === el) {
+        li.classList.add(isCorrect ? 'correct' : 'incorrect');
+      } else if (li.getAttribute('onclick') && li.getAttribute('onclick').includes('true')) {
+        li.classList.add('revealed');
+      }
+    });
+
+    if (exp) exp.classList.add('show');
+
+    totalAnswered++;
+    if (isCorrect) totalCorrect++;
+    document.getElementById('score-display').textContent = totalCorrect + ' / ' + totalAnswered;
+    document.getElementById('score-tracker').style.display = 'block';
+  }
+
+  function toggleSA(btn) {
+    const answer = btn.nextElementSibling;
+    if (answer.classList.contains('show')) {
+      answer.classList.remove('show');
+      btn.textContent = 'Reveal Model Answer';
+    } else {
+      answer.classList.add('show');
+      btn.textContent = 'Hide Answer';
+    }
+  }
+</script>
+</body>
+</html>
